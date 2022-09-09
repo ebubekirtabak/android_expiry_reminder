@@ -1,2 +1,2 @@
-# android_expiry_reminder
-Simple Android Expiry Reminder App
+# Expiry Reminder App
+Android Simple Expiry Reminder App
