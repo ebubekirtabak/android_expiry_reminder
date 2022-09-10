@@ -4,9 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.geng.expiry_reminder.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -27,10 +28,10 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        val categoryListView: RecyclerView = binding.categoryListView
+        categoryListView.layoutManager = LinearLayoutManager(requireContext().applicationContext)
+        homeViewModel.categoryViewAdapter.observe(viewLifecycleOwner) {
+            categoryListView.adapter = it
         }
         return root
     }
