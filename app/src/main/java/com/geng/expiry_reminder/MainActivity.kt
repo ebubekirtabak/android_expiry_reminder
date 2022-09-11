@@ -3,11 +3,19 @@ package com.geng.expiry_reminder
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.geng.expiry_reminder.databinding.ActivityMainBinding
+import com.geng.expiry_reminder.models.category.Category
+import com.geng.expiry_reminder.preferences.SettingsPreferences
+import kotlinx.coroutines.flow.map
+import java.util.prefs.Preferences
+
 
 class MainActivity : AppCompatActivity() {
 
