@@ -6,5 +6,7 @@ class Category(
     val name: String,
     @DrawableRes
     val icon: Int,
-    val id: Int
+    val id: Int,
+    @DrawableRes
+    val color: Int
 )
