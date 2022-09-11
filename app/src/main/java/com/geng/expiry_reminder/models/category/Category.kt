@@ -1,12 +1,19 @@
 package com.geng.expiry_reminder.models.category
 
 import androidx.annotation.DrawableRes
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-class Category(
+@Entity
+data class Category(
+    @PrimaryKey
+    val uid: Int,
+    @ColumnInfo(name = "name")
     val name: String,
-    @DrawableRes
+    @DrawableRes @ColumnInfo(name = "icon")
     val icon: Int,
     val id: Int,
-    @DrawableRes
+    @DrawableRes @ColumnInfo(name = "color")
     val color: Int
 )
