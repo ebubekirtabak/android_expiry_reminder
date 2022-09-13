@@ -4,18 +4,15 @@ import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.preferencesDataStore
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.geng.expiry_reminder.databinding.ActivityMainBinding
-import com.geng.expiry_reminder.models.category.Category
 import com.geng.expiry_reminder.preferences.SettingsPreferences
-import kotlinx.coroutines.flow.map
-import java.util.prefs.Preferences
-
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,10 +21,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        var isFirstRun: Boolean
-        SettingsPreferences(this@MainActivity).getIsFirstRun.map {
-            isFirstRun = it
-        }
+        var isFirstRun: Boolean = false
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -44,5 +38,23 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        GlobalScope.launch {
+            val settingsPreferences = SettingsPreferences(this@MainActivity)
+            settingsPreferences.getIsFirstRun.catch { e ->
+                e.printStackTrace()
+            }.collect {
+                isFirstRun = it
+                handleFirstRun(isFirstRun, settingsPreferences)
+            }
+        }
+
+    }
+
+    private suspend fun handleFirstRun(isFirstRun: Boolean, settingsPreferences: SettingsPreferences) {
+        if (!isFirstRun) {
+            return
+        }
+
+        settingsPreferences.setIsFirstRun(false)
     }
 }
