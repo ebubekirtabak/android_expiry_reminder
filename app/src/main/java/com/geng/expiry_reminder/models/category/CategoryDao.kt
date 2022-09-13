@@ -14,11 +14,17 @@ interface CategoryDao {
     fun loadAllByIds(categoryIds: IntArray): List<Category>
 
     @Query("SELECT * FROM category WHERE name LIKE :first LIMIT 1")
-    fun findByName(first: String, last: String): Category
+    fun findByName(first: String): Category
 
     @Insert
-    fun insertAll(vararg categories: Category)
+    fun insert(vararg category: Category)
+
+    @Insert
+    fun insertAll(vararg categories: ArrayList<Category>)
 
     @Delete
     fun delete(category: Category)
+
+    @Delete
+    fun deleteAll()
 }
