@@ -22,6 +22,6 @@ interface CategoryDao {
     @Delete
     fun delete(category: Category)
 
-    @Delete
+    @Query("DELETE FROM category")
     fun deleteAll()
 }
