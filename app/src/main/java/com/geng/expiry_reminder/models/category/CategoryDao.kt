@@ -16,8 +16,8 @@ interface CategoryDao {
     @Insert
     fun insert(vararg category: Category)
 
-    @Insert
-    fun insertAll(vararg categories: ArrayList<Category>)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAll(categories: List<Category>)
 
     @Delete
     fun delete(category: Category)
