@@ -1,9 +1,6 @@
 package com.geng.expiry_reminder.models.category
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface CategoryDao {
@@ -13,8 +10,8 @@ interface CategoryDao {
     @Query("SELECT * FROM category WHERE uid IN (:categoryIds)")
     fun loadAllByIds(categoryIds: IntArray): List<Category>
 
-    @Query("SELECT * FROM category WHERE name LIKE :first LIMIT 1")
-    fun findByName(first: String): Category
+    @Query("SELECT * FROM category WHERE name LIKE '%' || :name || '%' LIMIT 1")
+    fun findByName(name: String): Category
 
     @Insert
     fun insert(vararg category: Category)
