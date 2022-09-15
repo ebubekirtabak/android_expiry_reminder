@@ -50,6 +50,7 @@ abstract class AppDatabase : RoomDatabase() {
                     "ReminderDatabase"
                 )
                     .addCallback(AppDatabaseCallBack(scope))
+                    .allowMainThreadQueries()
                     .build()
                 INSTANCE = instance
                 instance
