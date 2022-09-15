@@ -1,22 +1,20 @@
 package com.geng.expiry_reminder.ui.home
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.geng.expiry_reminder.R
 import com.geng.expiry_reminder.adapters.CategoryViewAdapter
+import com.geng.expiry_reminder.database.AppDatabase
 import com.geng.expiry_reminder.models.category.Category
+import kotlinx.coroutines.*
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private val _categoryViewAdapter = MutableLiveData<CategoryViewAdapter>().apply {
-        val categoryList = arrayListOf<Category>(
-            Category(0,"Fridge", R.drawable.ic_baseline_food_bank_24, 1, R.color.purple_500),
-            Category(0,"Freezer", R.drawable.ic_baseline_kitchen_24, 2, R.color.blue),
-            Category(0,"Pantry", R.drawable.ic_cupboard_black_24, 3, R.color.gray),
-            Category(0,"Documents", R.drawable.ic_baseline_insert_drive_file_24, 4, R.color.deep_jungle_green),
-            Category(0,"Payments", R.drawable.ic_baseline_shopping_cart_24, 5, R.color.purple_500) ,
-            Category(0,"Medicine", R.drawable.ic_baseline_medical_services_24, 6, R.color.red)
-        )
+        val applicationScope = CoroutineScope(SupervisorJob())
+        val database by lazy { AppDatabase.getDatabase(application.applicationContext, applicationScope) }
+        val categoryList = database.CategoryDao().getAll() as ArrayList<Category>
         value = CategoryViewAdapter(categoryList)
     }
+
     val categoryViewAdapter: MutableLiveData<CategoryViewAdapter> = _categoryViewAdapter
 }
