@@ -1,7 +1,0 @@
-<resources>
-    <string name="app_name">expiry-reminder</string>
-    <string name="title_home">Categories</string>
-    <string name="title_upcoming">Upcoming</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="title_settings">Settings</string>
-</resources>
