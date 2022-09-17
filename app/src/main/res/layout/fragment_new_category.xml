@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FirstFragment">
+    tools:context=".activities.NewCategoryActivity.FirstFragment">
 
     <EditText
         android:id="@+id/editTextTextPersonName"
@@ -18,7 +18,7 @@
         tools:layout_editor_absoluteY="16dp" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/iconSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -27,12 +27,12 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
 
     <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/color_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/iconSpinner" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
