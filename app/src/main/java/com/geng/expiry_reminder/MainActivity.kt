@@ -1,9 +1,9 @@
 package com.geng.expiry_reminder
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +12,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.geng.expiry_reminder.activities.NewCategoryActivity.NewCategoryActivity
 import com.geng.expiry_reminder.databinding.ActivityMainBinding
 import com.geng.expiry_reminder.preferences.SettingsPreferences
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -24,7 +25,8 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    lateinit var fab2: FloatingActionButton
+    lateinit var fabMenuButton: FloatingActionButton
+    lateinit var newCategoryButton: FloatingActionButton
     lateinit var fab3: FloatingActionButton
     var isFABOpen: Boolean = false
     var backButtonPressed: Boolean = false
@@ -56,16 +58,25 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        var fab = findViewById<View>(R.id.new_action_button) as FloatingActionButton
-        fab2 = findViewById<View>(R.id.new_category_button) as FloatingActionButton
+        fabMenuButton = findViewById<View>(R.id.new_action_button) as FloatingActionButton
+        newCategoryButton = findViewById<View>(R.id.new_category_button) as FloatingActionButton
         fab3 = findViewById<View>(R.id.new_reminder_button) as FloatingActionButton
-        fab.setOnClickListener(object : View.OnClickListener {
+        fabMenuButton.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
                 if (!isFABOpen) {
                     showFABMenu()
                 } else {
                     closeFABMenu()
                 }
+            }
+        })
+
+        newCategoryButton.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(view: View?) {
+                val intent = Intent(applicationContext, NewCategoryActivity::class.java).apply {
+                    // putExtra(EXTRA_MESSAGE, message)
+                }
+                startActivity(intent)
             }
         })
 
@@ -82,13 +93,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun showFABMenu() {
         isFABOpen = true
-        fab2.animate().translationY(resources.getDimension(R.dimen.standard_55))
+        fabMenuButton.animate().rotation(360f)
+        newCategoryButton.animate().translationY(resources.getDimension(R.dimen.standard_55))
         fab3.animate().translationY(resources.getDimension(R.dimen.standard_105))
     }
 
     private fun closeFABMenu() {
+        fabMenuButton.animate().rotation(0f)
         isFABOpen = false
-        fab2.animate().translationY(resources.getDimension(R.dimen.fab_button_closed))
+        newCategoryButton.animate().translationY(resources.getDimension(R.dimen.fab_button_closed))
         fab3.animate().translationY(resources.getDimension(R.dimen.fab_button_closed))
 
     }

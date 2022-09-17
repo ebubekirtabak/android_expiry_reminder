@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Expiryreminder"
         tools:targetApi="31">
         <activity
-            android:name=".NewCategoryActivity"
+            android:name=".activities.NewCategoryActivity.NewCategoryActivity"
             android:exported="false"
             android:label="@string/title_activity_new_category"
             android:theme="@style/Theme.Expiryreminder.NoActionBar" />
