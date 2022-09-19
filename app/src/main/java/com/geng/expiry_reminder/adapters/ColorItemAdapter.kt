@@ -33,6 +33,19 @@ class ColorItemAdapter(
         return colorItemList[position].uid.toLong()
     }
 
+    override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+        val view: View
+        view = LayoutInflater.from(context).inflate(layoutResourceId, parent, false)
+        val textViewName: TextView = view!!.findViewById(R.id.color_item_text)
+        val currentItem: ColorItem? = getItem(position)
+
+        if (currentItem != null) {
+            textViewName.text = currentItem.name
+        }
+
+        return view
+    }
+
     private fun initView(
         position: Int, convertView: View?, parent: ViewGroup
     ): View {
