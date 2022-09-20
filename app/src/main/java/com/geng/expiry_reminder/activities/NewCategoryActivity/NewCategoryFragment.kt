@@ -19,7 +19,7 @@ import com.geng.expiry_reminder.models.items.IconItem
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class FirstFragment : Fragment(), AdapterView.OnItemSelectedListener {
+class NewCategoryFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     private var _binding: FragmentNewCategoryBinding? = null
 
@@ -61,9 +61,7 @@ class FirstFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 id: Long
             ) {
                 selectedColor = parentView?.getItemAtPosition(position) as ColorItem
-                if (iconSpinner !== null) {
-                    updateIconSpinnerAdapter()
-                }
+                updateIconSpinnerAdapter()
             }
 
             override fun onNothingSelected(parentView: AdapterView<*>?) {
