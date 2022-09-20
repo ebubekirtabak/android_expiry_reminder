@@ -1,11 +1,15 @@
 package com.geng.expiry_reminder.adapters
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import com.geng.expiry_reminder.R
 
 import com.geng.expiry_reminder.models.items.ColorItem
@@ -37,9 +41,11 @@ class ColorItemAdapter(
         val view: View
         view = LayoutInflater.from(context).inflate(layoutResourceId, parent, false)
         val textViewName: TextView = view!!.findViewById(R.id.color_item_text)
+        val colorView: View = view!!.findViewById(R.id.color_view)
         val currentItem: ColorItem? = getItem(position)
 
         if (currentItem != null) {
+            setBackgroundColor(colorView, currentItem.color)
             textViewName.text = currentItem.name
         }
 
@@ -57,11 +63,23 @@ class ColorItemAdapter(
 
         val textViewName: TextView = convertView!!.findViewById(R.id.color_item_text)
         val currentItem: ColorItem? = getItem(position)
+        val colorView: View = convertView!!.findViewById(R.id.color_view)
 
         if (currentItem != null) {
+            setBackgroundColor(colorView, currentItem.color)
             textViewName.text = currentItem.name
         }
 
         return convertView
+    }
+
+    private fun setBackgroundColor(iconView: View, color: Int) {
+        var buttonDrawable: Drawable? = iconView.background
+        buttonDrawable = DrawableCompat.wrap(buttonDrawable!!)
+        DrawableCompat.setTint(
+            buttonDrawable,
+            ContextCompat.getColor(iconView.context, color)
+        )
+        iconView.setBackgroundDrawable(buttonDrawable)
     }
 }
