@@ -15,4 +15,6 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="press_back_again_to_exit">Press Back Again to Exit</string>
     <string name="create_new_category">Create New Category</string>
+    <string name="category_name">Category Name</string>
+    <string name="category_created">Category created successfully</string>
 </resources>
