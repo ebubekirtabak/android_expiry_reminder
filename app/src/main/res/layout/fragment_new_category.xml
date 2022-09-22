@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/activity_vertical_margin"
     android:paddingTop="@dimen/activity_action_bar_gap"
-    android:paddingRight="@dimen/activity_vertical_margin"
-    tools:context=".activities.NewCategoryActivity.NewCategoryFragment">
+    android:paddingRight="@dimen/activity_vertical_margin">
 
     <EditText
         android:id="@+id/category_name_input"
