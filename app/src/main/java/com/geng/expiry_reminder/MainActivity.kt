@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
 /*        if (isFABOpen) {
             closeFABMenu()
-        }
+        }*/
 
         if (!backButtonPressed) {
             backButtonPressed = true
