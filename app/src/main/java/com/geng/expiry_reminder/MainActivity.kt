@@ -25,10 +25,6 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    lateinit var fabMenuButton: FloatingActionButton
-    lateinit var newCategoryButton: FloatingActionButton
-    lateinit var fab3: FloatingActionButton
-    var isFABOpen: Boolean = false
     var backButtonPressed: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,27 +54,6 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        fabMenuButton = findViewById<View>(R.id.new_action_button) as FloatingActionButton
-        newCategoryButton = findViewById<View>(R.id.new_category_button) as FloatingActionButton
-        fab3 = findViewById<View>(R.id.new_reminder_button) as FloatingActionButton
-        fabMenuButton.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(view: View?) {
-                if (!isFABOpen) {
-                    showFABMenu()
-                } else {
-                    closeFABMenu()
-                }
-            }
-        })
-
-        newCategoryButton.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(view: View?) {
-                val intent = Intent(applicationContext, NewCategoryActivity::class.java).apply {
-                    // putExtra(EXTRA_MESSAGE, message)
-                }
-                startActivity(intent)
-            }
-        })
 
     }
 
@@ -90,22 +65,6 @@ class MainActivity : AppCompatActivity() {
         settingsPreferences.setIsFirstRun(false)
     }
 
-
-    private fun showFABMenu() {
-        isFABOpen = true
-        fabMenuButton.animate().rotation(360f)
-        newCategoryButton.animate().translationY(resources.getDimension(R.dimen.standard_55))
-        fab3.animate().translationY(resources.getDimension(R.dimen.standard_105))
-    }
-
-    private fun closeFABMenu() {
-        fabMenuButton.animate().rotation(0f)
-        isFABOpen = false
-        newCategoryButton.animate().translationY(resources.getDimension(R.dimen.fab_button_closed))
-        fab3.animate().translationY(resources.getDimension(R.dimen.fab_button_closed))
-
-    }
-
     private fun showToastMessage(text: String) {
         val duration = Toast.LENGTH_SHORT
         val toast = Toast.makeText(applicationContext, text, duration)
@@ -113,7 +72,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (isFABOpen) {
+/*        if (isFABOpen) {
             closeFABMenu()
         }
 

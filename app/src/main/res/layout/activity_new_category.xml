@@ -24,12 +24,15 @@
     <include layout="@layout/fragment_new_category" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/save_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginBottom="16dp"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:backgroundTint="?colorPrimary"
+        app:hoveredFocusedTranslationZ="2dp"
+        app:tint="?colorOnPrimary"
+        app:srcCompat="@drawable/ic_baseline_save_24" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
