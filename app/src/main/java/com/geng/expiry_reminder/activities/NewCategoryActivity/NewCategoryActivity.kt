@@ -60,7 +60,10 @@ class NewCategoryActivity : AppCompatActivity() {
                 ColorItem(0, "Black", R.color.black),
                 ColorItem(0, "Gray", R.color.gray),
                 ColorItem(0, "Deep Jungle Green", R.color.deep_jungle_green),
-                ColorItem(0, "Purple", R.color.purple_500)
+                ColorItem(0, "Sea Green", R.color.sea_green),
+                ColorItem(0, "Purple", R.color.purple_500),
+                ColorItem(0, "Dark Purple", R.color.dark_purple),
+                ColorItem(0, "United Nation Blue", R.color.united_nation_blue),
             )
         )
         colorItemAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -122,7 +125,8 @@ class NewCategoryActivity : AppCompatActivity() {
                 IconItem(0, "Payments", selectedColor.color, R.drawable.ic_baseline_payments_24),
                 IconItem(0, "Shopping Cart", selectedColor.color, R.drawable.ic_baseline_shopping_cart_24),
                 IconItem(0, "Time", selectedColor.color, R.drawable.ic_time_black_24dp),
-                IconItem(0, "Home", selectedColor.color, R.drawable.ic_home_black_24dp)
+                IconItem(0, "Home", selectedColor.color, R.drawable.ic_home_black_24dp),
+                IconItem(0, "Boxes", selectedColor.color, R.drawable.ic_baseline_category_24)
             )
         )
         return iconList
