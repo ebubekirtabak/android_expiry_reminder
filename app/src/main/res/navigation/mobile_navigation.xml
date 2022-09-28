@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navigation_settings"
-        android:name="com.geng.expiry_reminder.ui.notifications.NotificationsFragment"
+        android:name="com.geng.expiry_reminder.ui.preferences.PreferencesFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
 </navigation>
