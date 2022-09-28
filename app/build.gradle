@@ -40,6 +40,7 @@ android {
             }
         }
     }
+    namespace 'com.geng.expiry_reminder'
 }
 
 dependencies {
