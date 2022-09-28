@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,7 +22,9 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     lateinit var fabMenuButton: FloatingActionButton
     lateinit var newCategoryButton: FloatingActionButton
-    lateinit var fab3: FloatingActionButton
+    lateinit var reminderButton: FloatingActionButton
+    lateinit var categoryButtonLabel: TextView
+    lateinit var reminderButtonLabel: TextView
     var isFABOpen: Boolean = false
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,7 +43,9 @@ class HomeFragment : Fragment() {
         }
         fabMenuButton = root.findViewById<View>(R.id.new_action_button) as FloatingActionButton
         newCategoryButton = root.findViewById<View>(R.id.new_category_button) as FloatingActionButton
-        fab3 = root.findViewById<View>(R.id.new_reminder_button) as FloatingActionButton
+        reminderButton = root.findViewById<View>(R.id.new_reminder_button) as FloatingActionButton
+        categoryButtonLabel = root.findViewById(R.id.category_button_text)
+        reminderButtonLabel = root.findViewById(R.id.reminder_button_text)
         fabMenuButton.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
                 Log.d("fabMenuButton CLick", isFABOpen.toString())
@@ -65,17 +70,24 @@ class HomeFragment : Fragment() {
 
     private fun showFABMenu() {
         isFABOpen = true
+        categoryButtonLabel.visibility = View.VISIBLE
+        reminderButtonLabel.visibility = View.VISIBLE
         fabMenuButton.animate().rotation(360f)
-        newCategoryButton.animate().translationY(resources.getDimension(R.dimen.standard_55))
-        fab3.animate().translationY(resources.getDimension(R.dimen.standard_105))
+        newCategoryButton.animate().translationY(resources.getDimension(R.dimen.fab_button_1))
+        reminderButtonLabel.animate().translationY(resources.getDimension(R.dimen.fab_button_2_label))
+        categoryButtonLabel.animate().translationY(resources.getDimension(R.dimen.fab_button_1_label))
+        reminderButton.animate().translationY(resources.getDimension(R.dimen.fab_button_2))
     }
 
     private fun closeFABMenu() {
         fabMenuButton.animate().rotation(0f)
         isFABOpen = false
         newCategoryButton.animate().translationY(resources.getDimension(R.dimen.fab_button_closed))
-        fab3.animate().translationY(resources.getDimension(R.dimen.fab_button_closed))
-
+        reminderButtonLabel.animate().translationY(resources.getDimension(R.dimen.fab_button_closed))
+        categoryButtonLabel.animate().translationY(resources.getDimension(R.dimen.fab_button_label_closed))
+        reminderButton.animate().translationY(resources.getDimension(R.dimen.fab_button_closed))
+        reminderButtonLabel.visibility = View.GONE
+        categoryButtonLabel.visibility = View.GONE
     }
 
     override fun onDestroyView() {
