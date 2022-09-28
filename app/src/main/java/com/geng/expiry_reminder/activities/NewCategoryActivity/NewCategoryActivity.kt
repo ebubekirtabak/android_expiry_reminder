@@ -33,6 +33,7 @@ class NewCategoryActivity : AppCompatActivity() {
     private var selectedColor: ColorItem = ColorItem(0, "Red", R.color.red)
     private lateinit var selectedIcon: IconItem
     private lateinit var colorItemAdapter: IconItemAdapter
+    private lateinit var categoryNameText: EditText
     private val applicationScope = CoroutineScope(SupervisorJob())
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +50,7 @@ class NewCategoryActivity : AppCompatActivity() {
         val saveButton: FloatingActionButton = findViewById(R.id.save_fab)
         val colorSpinner: Spinner = findViewById(R.id.color_spinner)
         val iconSpinner: Spinner = findViewById(R.id.icon_spinner)
-        val categoryNameText:EditText = findViewById(R.id.category_name_input)
+        categoryNameText = findViewById(R.id.category_name_input)
         initIconSpinner(iconSpinner)
         val colorItemAdapter = ColorItemAdapter(
             applicationContext,
@@ -84,10 +85,9 @@ class NewCategoryActivity : AppCompatActivity() {
         }
         colorSpinner.adapter = colorItemAdapter
         saveButton.setOnClickListener { view ->
+            categoryNameText.error = ""
             val category = Category(0, categoryNameText.text.toString(), selectedIcon.icon, 0, selectedColor.color)
             saveCategory(category)
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
         }
     }
 
@@ -139,6 +139,12 @@ class NewCategoryActivity : AppCompatActivity() {
     }
 
     private fun saveCategory(category: Category): Boolean {
+        if (category.name.isEmpty()) {
+            categoryNameText.error = resources.getString(R.string.category_name_is_not_valid)
+            showToastMessage(resources.getString(R.string.category_name_is_not_valid))
+            return false
+        }
+
         val database by lazy { AppDatabase.getDatabase(this, applicationScope) }
         try {
             database.CategoryDao().insert(category)
