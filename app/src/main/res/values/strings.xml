@@ -19,5 +19,7 @@
     <string name="category_created">Category created successfully</string>
     <string name="category_name_is_not_valid">Category name is not valid</string>
     <string name="basic_preferences">Basic Preferences</string>
+    <string name="theme_preferences">Theme Preferences</string>
     <string name="theme">Theme</string>
+    <string name="theme_style">Theme Style</string>
 </resources>
