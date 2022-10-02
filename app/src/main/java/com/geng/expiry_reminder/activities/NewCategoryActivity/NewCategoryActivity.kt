@@ -21,6 +21,7 @@ import com.geng.expiry_reminder.databinding.ActivityNewCategoryBinding
 import com.geng.expiry_reminder.models.category.Category
 import com.geng.expiry_reminder.models.items.ColorItem
 import com.geng.expiry_reminder.models.items.IconItem
+import com.geng.expiry_reminder.utils.AppThemeUtils
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
@@ -36,6 +37,7 @@ class NewCategoryActivity : AppCompatActivity() {
     private lateinit var categoryNameText: EditText
     private val applicationScope = CoroutineScope(SupervisorJob())
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(AppThemeUtils().getAppThemeStyle(this@NewCategoryActivity));
         super.onCreate(savedInstanceState)
 
         // binding = ActivityNewCategoryBinding.inflate(layoutInflater)

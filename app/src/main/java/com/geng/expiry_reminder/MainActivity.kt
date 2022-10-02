@@ -1,23 +1,20 @@
 package com.geng.expiry_reminder
 
-import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.geng.expiry_reminder.activities.NewCategoryActivity.NewCategoryActivity
+import androidx.preference.PreferenceManager
 import com.geng.expiry_reminder.databinding.ActivityMainBinding
 import com.geng.expiry_reminder.preferences.SettingsPreferences
+import com.geng.expiry_reminder.utils.AppThemeUtils
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -29,7 +26,8 @@ class MainActivity : AppCompatActivity() {
     var backButtonPressed: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        setTheme(AppThemeUtils().getAppThemeStyle(this@MainActivity));
+        setAppTheme()
         var isFirstRun: Boolean = false
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -53,6 +51,12 @@ class MainActivity : AppCompatActivity() {
                 handleFirstRun(isFirstRun, settingsPreferences)
             }
         }
+    }
+
+    private fun setAppTheme() {
+        val defaultPref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this@MainActivity)
+        val theme = defaultPref.getString("theme_style", "system").toString();
+        AppThemeUtils().updateAppTheme(theme)
     }
 
     private suspend fun handleFirstRun(isFirstRun: Boolean, settingsPreferences: SettingsPreferences) {
