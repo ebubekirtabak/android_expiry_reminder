@@ -2,11 +2,20 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <PreferenceCategory android:title="@string/basic_preferences">
+
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/theme_preferences">
         <DropDownPreference
-            android:entries="@array/themes"
-            android:entryValues="@array/themes"
-            android:key="Light"
+            android:entries="@array/theme_styles"
+            android:entryValues="@array/theme_styles"
+            android:key="theme_style"
             android:title="@string/theme"
+            app:useSimpleSummaryProvider="true" />
+        <DropDownPreference
+            android:entries="@array/theme_colors"
+            android:entryValues="@array/theme_colors"
+            android:key="theme_color"
+            android:title="@string/theme_style"
             app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
 </PreferenceScreen>
