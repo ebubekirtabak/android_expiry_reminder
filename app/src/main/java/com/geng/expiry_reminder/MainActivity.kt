@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -75,11 +76,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-/*        if (isFABOpen) {
-            closeFABMenu()
-        }*/
-
         if (!backButtonPressed) {
+            super.onBackPressed()
             backButtonPressed = true
             showToastMessage(resources.getString(R.string.press_back_again_to_exit))
             Handler(Looper.getMainLooper()).postDelayed(
@@ -89,7 +87,9 @@ class MainActivity : AppCompatActivity() {
                 2000
             );
         } else {
-            super.onBackPressed()
+            ActivityCompat.finishAffinity(this@MainActivity)
+
         }
     }
+
 }
