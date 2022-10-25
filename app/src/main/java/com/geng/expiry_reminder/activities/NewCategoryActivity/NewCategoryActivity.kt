@@ -7,17 +7,11 @@ import android.widget.AdapterView
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.geng.expiry_reminder.R
 import com.geng.expiry_reminder.adapters.ColorItemAdapter
 import com.geng.expiry_reminder.adapters.IconItemAdapter
 import com.geng.expiry_reminder.database.AppDatabase
-import com.geng.expiry_reminder.databinding.ActivityNewCategoryBinding
 import com.geng.expiry_reminder.models.category.Category
 import com.geng.expiry_reminder.models.items.ColorItem
 import com.geng.expiry_reminder.models.items.IconItem
@@ -29,8 +23,6 @@ import java.lang.Exception
 
 class NewCategoryActivity : AppCompatActivity() {
 
-    // private lateinit var appBarConfiguration: AppBarConfiguration
-    // private lateinit var binding: ActivityNewCategoryBinding
     private var selectedColor: ColorItem = ColorItem(0, "Red", R.color.red)
     private lateinit var selectedIcon: IconItem
     private lateinit var colorItemAdapter: IconItemAdapter
@@ -39,15 +31,9 @@ class NewCategoryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(AppThemeUtils().getAppThemeStyle(this@NewCategoryActivity));
         super.onCreate(savedInstanceState)
-
-        // binding = ActivityNewCategoryBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_new_category)
 
-        // setSupportActionBar(binding.toolbar)
-
-        // val navController = findNavController(R.id.nav_host_fragment_content_new_category)
-        // appBarConfiguration = AppBarConfiguration(navController.graph)
-        // setupActionBarWithNavController(navController, appBarConfiguration)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val saveButton: FloatingActionButton = findViewById(R.id.save_fab)
         val colorSpinner: Spinner = findViewById(R.id.color_spinner)
@@ -91,6 +77,11 @@ class NewCategoryActivity : AppCompatActivity() {
             val category = Category(0, categoryNameText.text.toString(), selectedIcon.icon, 0, selectedColor.color)
             saveCategory(category)
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     private fun initIconSpinner(iconSpinner: Spinner) {
@@ -165,9 +156,4 @@ class NewCategoryActivity : AppCompatActivity() {
         val toast = Toast.makeText(applicationContext, text, duration)
         toast.show()
     }
-    /* override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_new_category)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
-    } */
 }
